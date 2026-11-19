@@ -23,10 +23,7 @@ def update_assignments(data, centroids):
     assert (isinstance(centroids, np.ndarray) and centroids.ndim == 2
             and centroids.shape[1] == data.shape[1])
     # Compute distances and assign each point to a centroid.
-    N, K = data.shape[0], centroids.shape[0]
-    distances = np.zeros((N, K))
-    for j in range(K):
-        distances[:, j] = np.sum((data - centroids[j]) ** 2, axis=1)
+    distances = np.sum((data[:, None, :] - centroids[None, :, :]) ** 2, axis=2)
     # argmin returns the first minimum, so ties go to the lowest cluster index
     return np.argmin(distances, axis=1)
     # raise NotImplementedError("Implement the assignment step from scratch.")
