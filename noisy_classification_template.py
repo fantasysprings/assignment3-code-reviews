@@ -41,9 +41,7 @@ def corrupt_training_labels(clean_labels, rng):
     flip_probability = np.where(clean_labels > 0,
                                 POSITIVE_FLIP_PROBABILITY, NEGATIVE_FLIP_PROBABILITY)
     flip = rng.random(clean_labels.shape[0]) < flip_probability
-    noisy_labels = clean_labels.copy()
-    noisy_labels[flip] = - noisy_labels[flip]
-    return noisy_labels
+    return np.where(flip, -clean_labels, clean_labels)
     # raise NotImplementedError("Implement asymmetric training-label noise.")
 
 
