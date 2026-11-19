@@ -42,7 +42,7 @@ def update_centroids(data, centroids, assignments):
             and centroids.shape[1] == data.shape[1])
     assert isinstance(assignments, np.ndarray) and assignments.shape == (len(data),)
     # Update the centroid of each nonempty cluster.
-    new_centroids = np.array(centroids, dtype=float, copy=True)
+    new_centroids = centroids.astype(float, copy=True)
     for k in range(new_centroids.shape[0]):
         cluster_members = data[assignments == k]
         # a cluster with no members keeps its previous centroid
